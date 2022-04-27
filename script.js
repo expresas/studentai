@@ -204,7 +204,6 @@ function createStudent(studentData) {
     //ištrinsim tą elementą
     e.target.parentElement.remove();
     createAlert(`Studento ${personName} ${personSurname} įrašas sėkmingai ištrintas!`, 'red');
-
   })
   
   //mygtukas studento duomenų redagavimui 
@@ -241,7 +240,6 @@ function createStudent(studentData) {
     localStorage.setItem('allData', JSON.stringify(allData));
     //////////////////////////
 
-
     forma.querySelector('#submit').value = 'Išsaugoti pakeitimus';
 
     document.querySelectorAll('input[type=submit]').forEach(element => {
@@ -256,7 +254,7 @@ function createStudent(studentData) {
     console.dir(e);
   })
 }
-
+ 
 ///////////////////////////////////////////////////
 let forma = document.querySelector('#student-form');
 
