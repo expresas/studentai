@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studentai</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="wrapper">
+      <form class="wrapper-form" id="search-form">
+        <div>
+          <label for="search">Studento paieška pagal:</label>
+          
+          <select id="search-select">
+            <option value=".all">Visus duomenis</option>
+            <option value=".person-name">Vardas</option>
+            <option value=".person-surname">Pavardė</option>
+            <option value=".person-age">Amžius</option>
+            <option value=".person-itlevel">IT žinios</option>
+            <option value=".person-group">Grupė</option>
+            <option value=".person-skills">Programavimo kalbos</option>
+          </select>
+        
+          <input type="text" name="search" id="search-input" value="" class="">
+          <input type="submit" value="Ieškoti" id="search-submit">
+        </div>
+      </form>
+    </div>
+
+    <div class="wrapper">
+      <h1>Studentai</h1>
+      <form class="wrapper-form" id="student-form" action="">
+        <div>
+          <label for="name">Vardas:</label>
+          <input type="text" name="name" id="name" value="" class="required" placeholder="Vardenis">
+        </div>
+        <div>
+          <label for="surnname">Pavardė:</label>
+          <input type="text" name="surname" id="surname" value="" class="required" placeholder="Pavardenis">
+        </div>
+        <div>
+          <label for="age">Amžius:</label>
+          <input type="number" name="age" id="age" value="" class="required" placeholder="Kiek metų?">
+        </div>
+        <div>
+          <label for="tel">Telefonas:</label>
+          <input type="tel" name="tel" id="tel" value="" class="required" placeholder="8 6XX XXXXX">
+        </div>
+        <div>
+          <label for="email">El. paštas:</label>
+          <input type="email" name="email" id="email" value="" class="required" placeholder="vardas@pavarde.lt">
+        </div>
+        <div>
+          <label for="itLevel">IT žinios:</label>
+          <input type="range" name="itLevel" id="itLevel" min="1" max="10" value="">
+          <output name="output" id="outputValue">5</output>
+        </div>
+        <div>
+          <label for="">Grupė:</label>
+          <input type="radio" name="radio" id="radio1" value="Type 1">
+          <label for="radio1">Type 1</label>
+          <input type="radio" name="radio" id="radio2" value="Type 2">
+          <label for="radio2">Type 2</label>
+          <input type="radio" name="radio" id="radio3" value="Type 3">
+          <label for="radio3">Type 3</label>
+          <input type="radio" name="radio" id="radio4" value="Type 4">
+          <label for="radio4">Type 4</label>
+          <input type="radio" name="radio" id="radio5" value="Type 5" checked>
+          <label for="radio5">Type 5</label>
+          <input type="radio" name="radio" id="radio6" value="Type 6">
+          <label for="radio6">Type 6</label>
+          <input type="radio" name="radio" id="radio7" value="Type 7">
+          <label for="radio7">Type 7</label>
+          <input type="radio" name="radio" id="radio8" value="Type 8">
+          <label for="radio8">Type 8</label>
+          <input type="radio" name="radio" id="radio9" value="Type 9">
+          <label for="radio9">Type 9</label>
+          <input type="radio" name="radio" id="radio10" value="Type 10">
+          <label for="radio10">Type 10</label>
+        </div>
+
+        <fieldset>
+          <legend>Programavimo kalbos:</legend>
+          <input type="checkbox" name="languages" id="language1" value="JavaScript">
+          <label for="language1">JavaScript</label>
+          <input type="checkbox" name="languages" id="language2" value="Java">
+          <label for="language2">Java</label>
+          <input type="checkbox" name="languages" id="language3" value="Python">
+          <label for="language3">Python</label>
+          <input type="checkbox" name="languages" id="language4" value="C++">
+          <label for="language4">C++</label>
+          <input type="checkbox" name="languages" id="language5" value="C#">
+          <label for="language5">C#</label>
+          <input type="checkbox" name="languages" id="language6" value="Pascal">
+          <label for="language6">Pascal</label>
+          <input type="checkbox" name="languages" id="language7" value="BASIC">
+          <label for="language7">BASIC</label>
+        </fieldset>
+        <div>
+          <input type="submit" value="Submit" id="submit">
+        </div>
+      </form>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div id="students-list">
+    </div>
+
+</body>
+</html>
