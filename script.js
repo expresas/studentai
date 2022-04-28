@@ -19,7 +19,7 @@ function importData(students) {
 }
 // importData(studentDataArray);
 
-// funkcija, kuri perkrovus formą nuresetina itLeveli
+// funkcija, kuri perkrovus formą, nuresetina itLeveli
 function rangeUpdate() {
   let itLevel = document.querySelector('#outputValue');
   let itLevelValue = document.querySelector('#itLevel');
@@ -42,7 +42,7 @@ function createAlert(text, color) {
   setTimeout(() => {document.querySelector('#submitSpan').remove()}, 3000);
 };
 
-// funkcija, kuris pavers paduotą tekstą žvaigždutuėmis
+// funkcija, kuri pavers paduotą tekstą žvaigždutuėmis
 function cryptText(text) {
   let result = '';
   for (let i=1; i<=text.length; i++) {
@@ -110,8 +110,7 @@ function inputErrorMessage(inputElement, errorMessage) {
   inputElement.after(notValidSpan);
 }
 
-// funkcija sukurti studento kortelei padavus duomenis
-
+// funkcija sukurti studento kortelei, padavus duomenis
 let editThisStudent = '';
 function createStudent(studentData) {
 
@@ -128,8 +127,7 @@ function createStudent(studentData) {
 
   let divStudent = document.createElement('div');
   divStudent.setAttribute('id', 'student-item');
-  /// pridėsim personIP į klasę
-  // divStudent.classList.add = `${studentData.personID}`;
+  /// pridėsime personID į klasę (dėl localstorage)
   divStudent.classList.add(`${personID}`);
   
   let personNameEl = document.createElement('p');
@@ -170,7 +168,7 @@ function createStudent(studentData) {
   buttonShowHide.setAttribute('value', 'Rodyti duomenis');
   divStudent.prepend(buttonShowHide);
 
-  //eventlisteneris showhide mygtukui  
+  // eventlisteneris showhide mygtukui  
   buttonShowHide.addEventListener('click', e => {
     if (e.target.value === 'Rodyti duomenis') {
       e.target.value = 'Slėpti duomenis';
@@ -183,36 +181,35 @@ function createStudent(studentData) {
     }
   })
   
-  //mygtukas studento kortelės ištrynimui
+  // mygtukas studento kortelės ištrynimui
   let buttonRemovePerson = document.createElement('input');
   buttonRemovePerson.setAttribute('type', 'submit');
   buttonRemovePerson.setAttribute('value', 'Ištrinti studentą');
   buttonShowHide.after(buttonRemovePerson);
     
-  //eventlisteneris ištrynimo mygtukui  
+  // eventlisteneris ištrynimo mygtukui  
   buttonRemovePerson.addEventListener('click', e => {
     
     // atnaujinsime localstorage
     let initData = [] = JSON.parse(localStorage.getItem('allData'))
     let allData = [];
     initData.forEach(item =>{
-      // console.log(item.personID, personID)
       if (item.personID !== personID) allData.push(item);
     })
     localStorage.setItem('allData', JSON.stringify(allData));
 
-    //ištrinsim tą elementą
+    // ištrinsime tą elementą
     e.target.parentElement.remove();
     createAlert(`Studento ${personName} ${personSurname} įrašas sėkmingai ištrintas!`, 'red');
   })
   
-  //mygtukas studento duomenų redagavimui 
+  // mygtukas studento duomenų redagavimui 
   let buttonEditData = document.createElement('input');
   buttonEditData.setAttribute('type', 'submit');
   buttonEditData.setAttribute('value', 'Keisti duomenis');
   buttonRemovePerson.after(buttonEditData);
   
-  //eventlisteneris studento duomenų redagavimui 
+  // eventlisteneris studento duomenų redagavimui 
   buttonEditData.addEventListener('click', e => {
     forma.querySelector('#name').value = personName;
     forma.querySelector('#surname').value = personSurname;
@@ -223,7 +220,7 @@ function createStudent(studentData) {
     rangeUpdate();
     // radio mygtuko pažymėjimas
     forma.elements.radio.value = personGroup;
-    // check boxų sužymėjimas
+    // checkboxų sužymėjimas
     forma.querySelectorAll('input[name=languages]').forEach(checkbox => {
       checkbox.checked = false;
       personSkills.forEach(skill => {
@@ -238,7 +235,6 @@ function createStudent(studentData) {
       if (item.personID !== personID) allData.push(item);
     })
     localStorage.setItem('allData', JSON.stringify(allData));
-    //////////////////////////
 
     forma.querySelector('#submit').value = 'Išsaugoti pakeitimus';
 
@@ -246,7 +242,7 @@ function createStudent(studentData) {
       if (element.id === 'submit') return;
       element.disabled = true;
     })
-    // patį mygtuką atdisablinsim, rodysim
+    // patį mygtuką atdisablinsime, rodysim
     e.target.disabled = false;
     e.target.style.backgroundColor = 'white';
 
@@ -259,8 +255,7 @@ function createStudent(studentData) {
 let forma = document.querySelector('#student-form');
 
 forma.addEventListener('input', event => {
-   
-  ///sukurti objektą, perduosim localstorage
+  ///sukuriame objektą, jį išsaugosimelocalstorage
   let personSkillsCheckedLS = forma.querySelectorAll('input[name=languages]:checked');
   let personSkillsLS = []; 
   personSkillsCheckedLS.forEach(element => personSkillsLS.push(element.value));
@@ -279,10 +274,9 @@ forma.addEventListener('input', event => {
   localStorage.setItem('inputData', JSON.stringify(studentFormDataLS));
 })
 
-// jei yra inputai, juos užkrausime
+// jei yra inputai, į juos surašome duomenis iš localstorage
 if (localStorage.getItem('inputData')) {
   let savedInputData = JSON.parse(localStorage.getItem('inputData'));
-  console.dir(savedInputData)
   
   forma.querySelector('#name').value = savedInputData.name;
   forma.querySelector('#surname').value = savedInputData.surname;
@@ -300,20 +294,20 @@ if (localStorage.getItem('inputData')) {
   })
 }
 
-
 //formos submitinimas
 forma.addEventListener('submit', e => {
   e.preventDefault();
   
-  //supušinsim nodelisto elementus į paprastą masyvą
+  // nodelisto elementus surašome į masyvą
   let personSkillsChecked = forma.querySelectorAll('input[name=languages]:checked');
   let personSkills = []; 
   personSkillsChecked.forEach(element => personSkills.push(element.value));
 
-  // let randomNum = 'id' + Math.floor(Math.random() * Math.random() * 10000000);
+  // sukuriame random id
   let randomID = 'id' + Date.now() + Math.floor(Math.random() * 10000);
 
-  let studentFormData = { ///sukurti objektą kursi perduosim createStudent
+  // sukuriame objektą, kurį perduosime createStudent funkcijai
+  let studentFormData = { 
     name: forma.querySelector('#name').value,
     surname: forma.querySelector('#surname').value,
     age: forma.querySelector('#age').value,
@@ -325,13 +319,13 @@ forma.addEventListener('submit', e => {
     personID: randomID
   }
 
-  //// formos validacija, pradžia
-  if (validateForm(forma)) {     // jei (true) ty yra erroras, nutraukiam funkciją
+  // formos validacija: jei (true) t.y. yra error, nutraukiam funkciją
+  if (validateForm(forma)) {     
     createAlert(` Užpildyti ne visi privalomi formos laukeliai!`, 'red');    
     return;
   } 
 
-  // jei duomenis updeitinsim
+  // jei duomenis updeitinsime
   if (forma.querySelector('#submit').value === 'Išsaugoti pakeitimus') {
     editThisStudent.remove();
     forma.querySelector('#submit').value = 'Submit';
@@ -339,16 +333,13 @@ forma.addEventListener('submit', e => {
     // nuimame disabled nuo visų mygtukų
     document.querySelectorAll('input[type=submit]').forEach(element => element.disabled = false);
 
-    ////
-
     createAlert(` Studento ${studentFormData.name} ${studentFormData.surname} įrašas sėkmingai atnaujintas!`, 'orange');
   } else {
     // jei tiesiog sukursime studento įrašą per formą
     createAlert(` Studento ${studentFormData.name} ${studentFormData.surname} įrašas sukurtas!`, 'green');
   }
 
-  ///////////////////////////////////////
-  // console.log(localStorage.getItem('allData'))
+  // įrašome duomenis į localstorage
   let allData = [];
   if (!localStorage.getItem('allData')) {
     allData.push(studentFormData);
@@ -357,40 +348,26 @@ forma.addEventListener('submit', e => {
     let initData = [] = JSON.parse(localStorage.getItem('allData'))
     allData = initData.concat(studentFormData)
     localStorage.setItem('allData', JSON.stringify(allData));
-    // console.log(allData)
   }
-
-  /////////////////////////////////////////////////////////
-
 
   // sukuriame studento įrašą  
   createStudent(studentFormData);
 
-  // nuresetiname formą
+  // resetiname formą
   forma.reset();
 
-  // išvalome local storage po sekmingo formos pateikimo
-  // localStorage.clear();
+  // išvalome localstorage inputų duomenis po sėkmingo formos pateikimo
   localStorage.removeItem('inputData');
 
   rangeUpdate();
-
 });
-
-
-
-
 
 // paieškos forma
 let searchForm = document.querySelector('#search-form');
-let searchSpanEl = document.createElement('span');
-document.querySelector('#search-submit').after(searchSpanEl);
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
 
   let searchInput = searchForm.querySelector('#search-input').value;
-  searchSpanEl.textContent = ' ' + searchInput;
-
   let searchType = searchForm.querySelector('#search-select').value;
 
   let studentItems = document.querySelector('#students-list').querySelectorAll('#student-item');
@@ -410,4 +387,11 @@ searchForm.addEventListener('submit', e => {
 
     if (!result) element.hidden = true;
   })
+})
+
+// paieškos formos resetinimas
+let searchReset = document.querySelector('#search-reset');
+searchReset.addEventListener('click', () => {
+  document.querySelector('#search-input').value = '';
+  document.querySelector('#search-select').value = '.all';
 })
